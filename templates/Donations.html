@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercator</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> Mercator </a>
+
+    <nav class="navbar">
+        <a href="{{ url_for('sell') }}">sell</a>
+        <a href="{{ url_for('account') }}">Buy</a>
+        <a href="{{ url_for('donate') }}">Donations</a>
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-bars" id="menu-btn"></div>
+        <div class="fas fa-search" id="search-btn"></div>
+<!--        <div class="fas fa-shopping-cart" id="cart-btn"></div>-->
+        <a  href="{{ url_for('logout') }}" style="cursor: pointer; font-size : 1.5rem;"><svg xmlns="http://www.w3.org/2000/svg" style="margin-right:7px" width="16" height="16" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16">
+        <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+      </svg>Logout</a>
+    </div>
+
+    <form action="" class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </form>
+
+
+</header>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<section class="features" >
+
+    <h1 class="heading"> Donate<span>Products</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <div>
+                <form action="/account/donate" method="POST" >
+                    <br><br>
+                    <input  type="text" name="product_name" placeholder="Product Name" style="width:50%;" class="box"><br><br><br>
+                    <input type="email" name="public_email" placeholder="Your Email" style="width:50%;" class="box"><br><br><br>
+                    <input type="number" name="public_phone" placeholder="Your Contact Number" style="width:50%;" class="box"><br><br><br>
+                    <textarea name="description" placeholder="Product Description"rows="8" cols="80" style="width:50%;" class="box"></textarea><br><br><br>
+<!--                    <p>forget your password <a href="#">click here</a></p>-->
+                    <input type="submit" value="Submit" class="btn">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+input[type=number] {
+-moz-appearance: textfield;
+}
+</style>
+
+
+<section class="products" id="products">
+
+    <h1 class="heading"> Pending <span>Donations</span> </h1>
+
+    <div class="swiper product-slider">
+
+        <div class="">
+        {% for i in donatedres %}
+            <div class="swiper-slide box">
+                <img src="{{ url_for('static', filename='coming_soon.png') }}" alt="">
+                <h3>"{{ i['product_name'] }}"</h3>
+                <h2>{{ i['description'] }}</h2>
+                <form action="{{ i['delete_url'] }}" method="POST">
+                <button type="submit" class="btn">Delete Product</button>
+                </form>
+            </div><br>
+        {% endfor %}
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3> Mercator <i class="fas fa-shopping-basket"></i> </h3>
+            <p>Follow our company on various social media platforms.</p>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+<!--            <a href="#" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>-->
+            <a href="#" class="links"> <i class="fas fa-envelope"></i> query@mercatorbusiness.com</a> </a>
+<!--            <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Xyz Road, India </a>-->
+        </div>
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="{{ url_for('sell') }}" class="links"> <i class="fas fa-arrow-right"></i> sell </a>
+            <a href="{{ url_for('account') }}" class="links"> <i class="fas fa-arrow-right"></i> Buy </a>
+            <a href="{{ url_for('donate') }}" class="links"> <i class="fas fa-arrow-right"></i> Donations </a>
+        </div>
+    </div>
+</section>
+<!-- footer section ends -->
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

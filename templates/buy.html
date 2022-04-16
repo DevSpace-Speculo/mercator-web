@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercator</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> Mercator </a>
+
+    <nav class="navbar">
+        <a href="{{ url_for('sell') }}">sell</a>
+        <a href="{{ url_for('account') }}">Buy</a>
+        <a href="{{ url_for('donate') }}">Donations</a>
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-bars" id="menu-btn"></div>
+        <div class="fas fa-search" id="search-btn"></div>
+<!--        <div class="fas fa-shopping-cart" id="cart-btn"></div>-->
+        <a  href="{{ url_for('logout') }}" style="cursor: pointer; font-size : 1.5rem;"><svg xmlns="http://www.w3.org/2000/svg" style="margin-right:7px" width="16" height="16" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16">
+        <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
+      </svg>Logout</a>
+    </div>
+
+    <form action="" class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </form>
+
+
+</header>
+
+
+<br><br><br><br><br>
+<h3 style="color:red;">{{ sucmsg }}</h3><br><br>
+<section class="features" id="features">
+
+    <h1 class="heading"> our <span>features</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="{{ url_for('static', filename='feature-img-1.png') }}" alt="">
+            <h3>Donate </h3>
+            <p>Click button below to donate your stuff</p>
+            <a href="{{ url_for('donate') }}" class="btn">Donate</a>
+        </div>
+
+        <div class="box">
+            <img src="{{ url_for('static', filename='Why-Buy-It.jpg') }}" alt="">
+            <h3>Buy</h3>
+            <p>Click button below to Buy Products</p>
+            <a href="{{ url_for('account') }}" class="btn">Buy</a>
+        </div>
+
+
+        <div class="box">
+            <img src="{{ url_for('static', filename='feature-img-2.png') }}" alt="">
+            <h3>Sell </h3>
+            <p>Click the button to sell your stuff</p>
+            <a href="{{ url_for('sell') }}" class="btn">Sell</a>
+        </div>
+    </div>
+
+</section>
+
+<!-- features section ends -->
+
+<!-- products section starts  -->
+
+<section class="products" id="products">
+    <h1 class="heading"> Available <span>products</span> </h1>
+    <div class="swiper product-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide box">
+                <img src="{{ url_for('static', filename='laptop.jpg') }}" alt="">
+                <h3>Portable Steel Laptop Stand</h3>
+                <div class="price"> Rs. 200 </div>
+                <div class="price"> Ph No. 1234567890 </div>
+                <div class="price"> student@gmail.com </div>
+            </div>
+        </div>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide box">
+                <img src="{{ url_for('static', filename='algo.jpg') }}"  alt="">
+                <h3>"Introduction to Algorithms”</h3>
+                <div class="price"> Rs. 350 </div>
+                <div class="price"> Ph No. 1122334455 </div>
+                <div class="price"> student@gmail.com </div>
+            </div>
+        </div>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide box">
+                <img src="{{ url_for('static', filename='elec.jpg') }}" alt="">
+                <h3>"Fundamental of Electric Circuits”</h3>
+                <div class="price"> Rs. 500 </div>
+                <div class="price"> Ph No. 1123336459 </div>
+                <div class="price"> student@gmail.com </div>
+            </div>
+        </div>
+        {% for i in sold_res %}
+        <div class="swiper-wrapper">
+            <div class="swiper-slide box">
+                <img src="{{ url_for('static', filename='coming_soon.png') }}" alt="">
+                <h3>"{{ i['product_name'] }}"</h3>
+                <h2>{{ i['description'] }}</h2>
+                <div class="price"> {{ i['price'] }} </div>
+                <div class="price"> Ph No. {{ i['public_phone'] }}</div>
+                <div class="price"> {{ i['public_mail'] }} </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+<!-- products section ends -->
+
+<!-- categories section starts  -->
+
+<section class="categories" id="categories">
+
+    <h1 class="heading"> donated <span>products</span> </h1>
+
+    <div class="box-container">
+        {% for i in donated_res %}
+        <div class="box">
+            <img src="{{ url_for('static', filename='coming_soon.png') }}" alt="">
+            <h3>{{ i['product_name'] }}</h3>
+            <h2>{{ i['description'] }}</h2>
+            <p>Ph No. {{ i['public_phone'] }}</p>
+            <div class="price"> {{ i['public_mail'] }} </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- categories section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3> Mercator <i class="fas fa-shopping-basket"></i> </h3>
+            <p>Follow our company on various social media platforms.</p>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+            <a href="#" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+            <a href="#" class="links"> <i class="fas fa-envelope"></i> query@mercatorbusiness.com</a> </a>
+            <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Xyz Road, India </a>
+        </div>
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="{{ url_for('sell') }}" class="links"> <i class="fas fa-arrow-right"></i> sell </a>
+            <a href="{{ url_for('account') }}" class="links"> <i class="fas fa-arrow-right"></i> Buy </a>
+            <a href="{{ url_for('donate') }}" class="links"> <i class="fas fa-arrow-right"></i> Donations </a>
+        </div>
+    </div>
+</section>
+<!-- footer section ends -->
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+</html>

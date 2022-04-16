@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercator</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> Mercator </a>
+
+<!--    <nav class="navbar">-->
+<!--        <a href="#home">home</a>-->
+<!--        <a href="#features">features</a>-->
+<!--        <a href="#products">Buy</a>-->
+<!--        <a href="#categories">Donations</a>-->
+<!--    </nav>-->
+
+    <div class="icons">
+<!--        <div class="fas fa-bars" id="menu-btn"></div>-->
+<!--        <div class="fas fa-search" id="search-btn"></div>-->
+<!--        <div class="fas fa-shopping-cart" id="cart-btn"></div>-->
+    </div>
+
+    <form action="" class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </form>
+
+
+</header>
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" style="background: url({{ url_for('static', filename='banner.png') }});repeat:no-repeat;" id="home">
+
+    <div class="content">
+        <h3>Buy Sell <span>Products</span> in your college</h3>
+        <p>Buy, sell and donate stuff that is not required by you. easily list out your products for them to be viewed by those who need them </p>
+    </div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- features section starts  -->
+
+<section class="features" >
+
+    <h1 class="heading"> <span>Login</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <div>
+                <form action="/login" method="POST" >
+                    <br><br>
+                    <input  type="email" name = "email" placeholder="your email" style="width:50%;" class="box"><br><br><br>
+                    <input type="password" name = "password" placeholder="your password" style="width:50%;" class="box">
+<!--                    <p>forget your password <a href="#">click here</a></p>-->
+                    <p>don't have an account <a href="{{ url_for('register') }}">create now</a></p>
+                    <input type="submit" value="login now" class="btn">
+                    <br>
+                    <h3 style="color:red" >{{ermsg}}</h3>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="features" id="features">
+
+    <h1 class="heading"> our <span>features</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="{{ url_for('static', filename='feature-img-1.png') }}" alt="">
+            <h3>Donate </h3>
+            <p>Click button below to donate your stuff</p>
+            <a href="#" class="btn">Donate</a>
+        </div>
+
+        <div class="box">
+            <img src="{{ url_for('static', filename='Why-Buy-It.jpg') }}" alt="">
+            <h3>Buy</h3>
+            <p>Click button below to Buy Products</p>
+            <a href="{{ url_for('account') }}" class="btn">Buy</a>
+        </div>
+
+        <div class="box">
+            <img src="{{ url_for('static', filename='feature-img-2.png') }}" alt="">
+            <h3>Sell </h3>
+            <p>Click the button to sell your stuff</p>
+            <a href="#" class="btn">Sell</a>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3> Mercator <i class="fas fa-shopping-basket"></i> </h3>
+            <p>Follow our company on various social media platforms.</p>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+<!--            <a href="#" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>-->
+            <a href="#" class="links"> <i class="fas fa-envelope"></i> query@mercatorbusiness.com</a> </a>
+<!--            <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> Xyz Road, India </a>-->
+        </div>
+
+        <div class="box">
+            <h3>quick links</h3>
+
+            <a href="{{ url_for('sell') }}" class="links"> <i class="fas fa-arrow-right"></i> sell </a>
+            <a href="{{ url_for('account') }}" class="links"> <i class="fas fa-arrow-right"></i> Buy </a>
+            <a href="{{ url_for('donate') }}" class="links"> <i class="fas fa-arrow-right"></i> Donations </a>
+        </div>
+    </div>
+</section>
+<!-- footer section ends -->
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
